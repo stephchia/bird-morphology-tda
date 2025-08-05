@@ -20,4 +20,4 @@ MYA <- 0
 
 # plots gap history and print gap summary for empirical dataset
 plot_gap_history_print_summary("empirical", MYA, MAX_MYA, THRES_PERSIST, THRES_DIST, THRES_SIZE, color = TRUE)
-ggsave("output/gap_history.pdf", width = 10, height = 5)
+ggsave(paste0("output/gap_history/gap_history_", MYA, "mya.pdf"), width = 10, height = 5)

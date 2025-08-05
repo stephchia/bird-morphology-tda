@@ -139,9 +139,6 @@ plot_gap_history <- function(trait_data, mya, df_segments, gap_df,
   
   p_trait <- ggplot(trait_data, aes(x = pc1, y = pc2)) +
     geom_point(alpha = 0.4, size = 2, stroke = 0, color = "gray60") +
-    geom_segment(df_segments,
-                 mapping = aes(x = x1, xend = x2, y = y1, yend = y2, group = group, color = group),
-                 linewidth = 1, lineend = "round") +
     scale_x_continuous(limits = lim_pc1, expand = expand) +
     scale_y_continuous(limits = lim_pc2, expand = expand) +
     theme_classic() +
@@ -152,6 +149,12 @@ plot_gap_history <- function(trait_data, mya, df_segments, gap_df,
           axis.title = element_blank(),
           legend.position = "none",
           plot.margin = margin(0,0,0,0))
+  if (!is.null(df_segments)) { 
+    p_trait <- p_trait +
+      geom_segment(df_segments,
+                   mapping = aes(x = x1, xend = x2, y = y1, yend = y2, group = group, color = group),
+                   linewidth = 1, lineend = "round")
+  }
   
   p_x <- ggplot(gap_df, aes(x = pc1, y = mya, size = size, color = group, 
                             stroke = 3 / (1 - THRES_PERSIST) * (persistence - THRES_PERSIST) + 1.5)) +
@@ -222,18 +225,22 @@ plot_gap_history_print_summary <- function(dataset, mya = 0, MAX_MYA, THRES_PERS
   data_modern <- read.csv(file.path(path_base, "trait_0mya.csv"))
   data_now <- read.csv(file.path(path_base, paste0("trait_", mya, "mya.csv")))
   
-  ## prepare data for the scatter hole plot (top right plot)
+  ## prepare data for the scatter hole plot (top right plot)\
   idx_mya <- df_gaps$idx[df_gaps$mya == mya] # index of gap appearing in x Mya
-  
+
   # create data frame of all gap coordinates with columns indication gap id and size
-  segment_data <- bind_rows(lapply(seq_along(idx_mya), function(i) {
-    coords <- get_gap_coordinates(tda)[as.numeric(sub(".*_", "", idx_mya[i]))]
-    as.data.frame(coords[[1]]) %>%
-      mutate(idx = idx_mya[i], size = NA)
-  })) %>%
-    left_join(df_gaps %>% select(idx, group), by = "idx") %>%
-    mutate(group = factor(group)) %>%
-    setNames(c("x1","x2","y1","y2","z1","z2","w1","w2","idx","size","group"))
+  if (length(idx_mya) > 0) {
+    segment_data <- bind_rows(lapply(seq_along(idx_mya), function(i) {
+      coords <- get_gap_coordinates(tda)[as.numeric(sub(".*_", "", idx_mya[i]))]
+      as.data.frame(coords[[1]]) %>%
+        mutate(idx = idx_mya[i], size = NA)
+    })) %>%
+      left_join(df_gaps %>% select(idx, group), by = "idx") %>%
+      mutate(group = factor(group)) %>%
+      setNames(c("x1","x2","y1","y2","z1","z2","w1","w2","idx","size","group"))
+  } else {
+    segment_data <- NULL
+  }
   
   # set axes limits
   lim_pc1 <- range(data_modern$pc1)

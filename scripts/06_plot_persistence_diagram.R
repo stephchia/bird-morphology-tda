@@ -7,7 +7,7 @@ library(ggplot2)
 library(dplyr)
 library(cowplot)
 
-source("scripts/function_perseistent_diagram.R")
+source("scripts/function_persistent_diagram.R")
 
 # Individual persistence diagrams for empirical data (at 0 and 5 Mya)
 cols <- c("gray50", "#4fbd9d", "#cc4949")
