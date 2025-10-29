@@ -26,7 +26,7 @@ compute_rips <- function(data, max_dim = 1, max_scale = 10) {
 # ----------------------------------------
 # Empirical dataset
 # ----------------------------------------
-for (mya in 20:0) {
+for (mya in 10:0) {
   data <- read.csv(paste0("data/empirical/trait_", mya, "mya.csv"))
   tic <- proc.time()
   diag <- compute_rips(data)
@@ -40,7 +40,7 @@ for (mya in 20:0) {
 # Simulated datasets
 # ----------------------------------------
 compute_sim_tda <- function(sim_index) {
-  for (mya in 20:0) {
+  for (mya in 10:0) {
     data <- read.csv(paste0("data/simulate/sim", sim_index, "/trait_", mya, "mya.csv"))
     tic <- proc.time()
     diag <- compute_rips(data)
