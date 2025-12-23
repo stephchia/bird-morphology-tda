@@ -1,2 +1,4 @@
 data/raw/tree1k.rds
+data/simulate_ou
+script/OUsimulation.R
 .Rproj.user
