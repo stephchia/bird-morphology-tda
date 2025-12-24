@@ -1,4 +1,5 @@
-data/raw/tree1k.rds
+._*
 data/simulate_ou
+script/zaratan
 script/OUsimulation.R
 .Rproj.user
