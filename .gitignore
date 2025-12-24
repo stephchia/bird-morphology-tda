@@ -1,4 +1,8 @@
 ._*
+**/.RData
+**/.Rhistory
+**/.DS_Store
+**/.Ruserdata
 data/simulate_ou
 script/zaratan
 script/OUsimulation.R
