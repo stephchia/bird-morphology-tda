@@ -2,6 +2,7 @@
 # ------------------------------------------------------------
 library(cowplot)
 library(phytools)
+library(ggplot2)
 
 plot_trait_pc <- function(dataset, mya) {
   data <- read.csv(paste0("data/", dataset, "/trait_", mya, "mya.csv"))

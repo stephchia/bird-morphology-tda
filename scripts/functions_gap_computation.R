@@ -1,6 +1,8 @@
 # Functions: Gap computation
 # ----------------------------------------------------
 library(cowplot)
+library(dplyr)
+library(ggplot2)
 
 # Compute topological persistence (death - birth) of H1 features
 get_topological_persistence <- function(tda) {

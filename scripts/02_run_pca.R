@@ -54,4 +54,5 @@ ggplot() +
   theme(panel.grid = element_blank(),
         axis.title = element_blank(),
         axis.line = element_line(linewidth = 0.2))
+
 ggsave("output/trait_pca.pdf", width = 8, height = 4)
