@@ -1,3 +1,8 @@
+library(phytools)
+library(ggtree)
+library(dplyr)
+library(tidyr)
+
 #-------------------------------------------
 # Phylogenetic relationship
 #-------------------------------------------

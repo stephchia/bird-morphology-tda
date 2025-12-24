@@ -1,5 +1,6 @@
 # Functions: Empirical and simulated gap comparison
 # ------------------------------------------------------
+library(ggdensity)
 
 plot_gap_stats_1D <- function(dt_sim, dt_emp, highlight = NULL, var, xlab, ymax) {
   p <- ggplot(dt_sim, aes_string(x = var)) +

@@ -1,6 +1,7 @@
 
 # Functions: Ancestral state reconstruction and simulation
 # -------------------------------------------------------------
+library(phytools)
 
 # Interpolate reconstructed ancestral traits at specific time point
 get_traits_at_timepoint <- function(tree, tipnode, mya) {

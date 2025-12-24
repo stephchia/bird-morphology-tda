@@ -1,5 +1,7 @@
 # Functions: Plot persistence diagram and trait distribution
 # ------------------------------------------------------------
+library(cowplot)
+library(phytools)
 
 plot_trait_pc <- function(dataset, mya) {
   data <- read.csv(paste0("data/", dataset, "/trait_", mya, "mya.csv"))
