@@ -4,6 +4,7 @@
 **/.DS_Store
 **/.Ruserdata
 data/simulate_ou
+data/processed/anc_sim_ou.rds
 script/zaratan
 script/OUsimulation.R
 .Rproj.user
