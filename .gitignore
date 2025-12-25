@@ -5,6 +5,5 @@
 **/.Ruserdata
 data/simulate_ou
 data/processed/anc_sim_ou.rds
-script/zaratan
-script/OUsimulation.R
+scripts/OUsimulation.R
 .Rproj.user
