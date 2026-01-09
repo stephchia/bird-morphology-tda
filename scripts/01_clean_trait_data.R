@@ -1,5 +1,3 @@
-# 01_clean_trait_data.R
-# ---------------------
 # This script loads and cleans AVONET morphological trait data.
 
 # Load required packages
@@ -35,6 +33,6 @@ passeroid <- process_trait_data(passeroid) %>% scale
 non_passeroid <- process_trait_data(non_passeroid)
 
 # save processed passeroid trait data
-saveRDS(passeroid, "data/processed/trait_passeroid.rds")
+dir.create("data/processed", showWarnings = FALSE)
+saveRDS(passeroid, "data/processed/trait_passeroid_raw.rds")
 saveRDS(non_passeroid, "data/processed/trait_non_passeroid_raw.rds")
-

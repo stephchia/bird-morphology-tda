@@ -1,9 +1,8 @@
-# 05_persistent_homology.R
-# -----------------------------
 # This script computes persistent homology (H0 and H1) across time slices
 # for empirical and simulated datasets using the TDA package.
-# Intended to be run on an HPC cluster (e.g., SLURM).
-# Recommend: assign ≥500GB RAM for mya = 0
+# This was executed on an HPC cluster.
+# RAM: recommend assigning ≥500GB RAM for mya = 0
+# Runtime: ~10 days of for single core
 
 library(TDA)
 library(parallel)
@@ -26,6 +25,7 @@ compute_rips <- function(data, max_dim = 1, max_scale = 10) {
 # ----------------------------------------
 # Empirical dataset
 # ----------------------------------------
+# Runtime ~1 day for single core
 for (mya in 10:0) {
   data <- read.csv(paste0("data/empirical/trait_", mya, "mya.csv"))
   tic <- proc.time()
@@ -39,6 +39,7 @@ for (mya in 10:0) {
 # ----------------------------------------
 # Simulated datasets
 # ----------------------------------------
+# Runtime ~10 days for single core
 compute_sim_tda <- function(sim_index) {
   for (mya in 10:0) {
     data <- read.csv(paste0("data/simulate/sim", sim_index, "/trait_", mya, "mya.csv"))

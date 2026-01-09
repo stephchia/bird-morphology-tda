@@ -1,5 +1,3 @@
-# 03_build_consensus_tree.R
-# --------------------------
 # This script builds a consensus phylogenetic tree for Passeroidea 
 # from 1,000 sampled trees from the Hackett backbone.
 
@@ -8,21 +6,21 @@ library(phytools)
 # ------------------------------------------------------------------
 # STEP 1: Randomly select 1,000 trees from the 10,000 Hackett trees
 # ------------------------------------------------------------------
-# NOTE: Original tree files were downloaded from https://birdtree.org/
-#       and are not included in the repository due to size.
+# NOTE: This cannot be run directly (input files are not included in the repository due to size).
+#       Original file can be downloaded from https://birdtree.org/
 
 # Sample 100 trees from every 1k tree file (Warning: long runtime, ~30min)
-tree1k <- list()
-for (i in 1:10) {
-  if (i == 1) {
-    trees <- read.tree("AllBirdsHackett1.tre")
-  } else {
-    trees <- read.tree(paste0("BirdzillaHackett", i, ".tre"))
-  }
-  tree1k <- c(tree1k, trees[sample(1000, 100)])
-}
+# tree1k <- list()
+# for (i in 1:10) {
+#   if (i == 1) {
+#     trees <- read.tree("AllBirdsHackett1.tre")
+#   } else {
+#     trees <- read.tree(paste0("BirdzillaHackett", i, ".tre"))
+#   }
+#   tree1k <- c(tree1k, trees[sample(1000, 100)])
+# }
 
-saveRDS(tree1k, "data/tree1k.rds")
+# saveRDS(tree1k, "data/raw/tree1k.rds")
 
 # ------------------------------------------------------------------------
 # STEP 2: Trim trees and build a consensus tree

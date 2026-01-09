@@ -1,5 +1,3 @@
-# 08_compare_null_gaps.R
-# ------------------------------
 # This script compares the distribution of topological gaps
 # between empirical and simulated trait evolution data.
 
@@ -27,7 +25,7 @@ gap_stats_emp <- get_gap_summary(
   )$df_gaps
 
 # Simulated gaps (takes a minute)
-gap_stats_sim <- bind_rows(lapply(1:10, function(sim_id) { # a few minutes
+gap_stats_sim <- bind_rows(lapply(1:10, function(sim_id) {
   get_gap_summary(
     paste0("data/simulate/sim", sim_id), MAX_MYA, THRES_PERSIST, THRES_DIST, THRES_SIZE
     )$df_gaps %>%
@@ -53,7 +51,7 @@ ggsave("output/img_gap_stats/1d_size.pdf", width = 6, height = 2.5)
 plot_gap_stats_1D(gap_sim_now, gap_emp_now, var = "sparsity", xlab = "Sparsity", ymax = 2.5)
 ggsave("output/img_gap_stats/1d_sparsity.pdf", width = 6, height = 2.5)
 
-# 2D plot: persistence vs. sparsity (Figure 4A)
+# 2D plot: persistence vs. sparsity (Figure 5A)
 plot_gap_stats_2D(gap_sim_now, gap_emp_now,
                   highlight = focal_gap, # Highlight the focal gap
                   x = "sparsity", y = "persistence",
@@ -90,7 +88,7 @@ gap_series_sim <- bind_rows(lapply(1:10, function(sim_id) {
                        MAX_MYA, THRES_PERSIST, THRES_DIST, THRES_SIZE, paste0("sim", sim_id))
 }))
 
-# Plot: evolutionary lifespan vs. sparsity (Figure 4B)
+# Plot: evolutionary lifespan vs. sparsity (Figure 5B)
 plot_gap_series_2d(data_sim = gap_series_sim, data_emp = gap_series_emp,
                    x = "evo_lifespan", y = "sparsity",
                    xlab = "Evolutionary lifespan (million years)", ylab = "Sparsity (PC unit)")

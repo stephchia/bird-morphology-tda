@@ -1,5 +1,3 @@
-# 02_run_pca.R
-# ------------------
 # This script performs PCA on Passeroidea, and saves PC scores for downstream analysis.
 
 # Load required packages
@@ -8,7 +6,7 @@ library(ggplot2)
 library(factoextra)
 
 # Load trait data
-passeroid <- readRDS("data/processed/trait_passeroid.rds")
+passeroid <- readRDS("data/processed/trait_passeroid_raw.rds")
 
 # Run PCA
 pca <- prcomp(passeroid, scale. = TRUE)
@@ -26,9 +24,8 @@ if (pca$rotation["Hand.Wing.Index", "PC3"] < 0) pca <- flip_pc_sign(pca, "PC3")
 if (pca$rotation["Beak.Length_Culmen", "PC4"] < 0) pca <- flip_pc_sign(pca, "PC4")
 
 # Add proportion of variance explained as the 11th row
-pca_summary <- rbind(pca$rotation, 
-                     "Variance (%)" = (pca$sdev)^2/sum((pca$sdev)^2)*100)
-pca_summary
+pca_summary <- rbind(pca$rotation, "Variance (%)" = (pca$sdev)^2/sum((pca$sdev)^2)*100)
+pca_summary # Table S1
 sum(pca_summary["Variance (%)", 1:4]) # total variance explained by first 4 PCs
 saveRDS(pca, "data/processed/pca.rds")
 
@@ -37,7 +34,7 @@ passeroid_pca <- as.data.frame(as.matrix(passeroid) %*% pca$rotation[, 1:4])
 colnames(passeroid_pca) <- c("pc1", "pc2", "pc3", "pc4")
 write.csv(passeroid_pca, "data/processed/trait_passeroid_pca.csv")
 
-# PCA biplot (PC1 vs PC2)
+# PCA biplot (PC1 vs PC2) (Figure 2)
 pca_biplot <- fviz_pca_biplot(pca, label=c("var","quali"), repel = TRUE)
 scaler <- 1.7
 ggplot() +
@@ -55,4 +52,5 @@ ggplot() +
         axis.title = element_blank(),
         axis.line = element_line(linewidth = 0.2))
 
+dir.create("output", showWarnings = FALSE)
 ggsave("output/trait_pca.pdf", width = 8, height = 4)

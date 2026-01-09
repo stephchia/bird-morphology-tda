@@ -1,5 +1,3 @@
-# 04_ancestral_reconstruction.R
-# -----------------------------
 # This script performs ancestral state reconstruction, simulates null trait evolution,
 # interpolates traits over evolutionary time, and visualizes evolutionary trajectories.
 
@@ -59,7 +57,7 @@ saveRDS(anc_sim, "data/processed/anc_sim.rds")
 tmax <- 10  # set maximum Mya to be processed
 
 ## Empirical data
-anc_emp <- readRDS("data/processed/anc_emp.rds")
+# anc_emp <- readRDS("data/processed/anc_emp.rds")
 dir.create("data/empirical", showWarnings = FALSE)
 
 # for every million year, interpolate trait values and save as a separate file
@@ -89,7 +87,7 @@ for (i in 1:10) {
 names <- c(tree$tip.label, (nrow(trait) + 1):nrow(anc_emp))
 traits_emp <- lapply(1:4, function(i) setNames(anc_emp[, i], names))
 
-## Plot 1D evolutionary trajectories for each PC
+## Plot 1D evolutionary trajectories for each PC (Figure S1)
 for (i in 1:4) {
   plot_1D_trajectory(tree, traits_emp[[i]], xbreaks = seq(0, 40, 5))
 }
@@ -106,7 +104,7 @@ for (i in 1:nrow(H)) {
   names(contmap$tree$maps[[i]]) <- segment_times
 }
 
-# Plot morphospace trajectory (PC1 vs. PC2)
+# Plot morphospace trajectory (PC1 vs. PC2) (Figure S2)
 phylomorphospace(contmap$tree,
                  trait[, 1:2],
                  anc_emp[(nrow(trait) + 1):nrow(anc_emp), 1:2],
