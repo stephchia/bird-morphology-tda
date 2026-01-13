@@ -76,6 +76,7 @@ for (i in 1:10) {
   dir.create(sim_dir, showWarnings = FALSE)
   for (mya in 0:tmax) {
     interpolated <- get_traits_at_timepoint(tree, anc_sim[[i]], mya)
+    colnames(interpolated) <- c("pc1", "pc2", "pc3", "pc4")
     write.csv(interpolated, file = file.path(sim_dir, paste0("trait_", mya, "mya.csv")), row.names = FALSE)
   }
 }

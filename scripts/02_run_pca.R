@@ -26,6 +26,7 @@ if (pca$rotation["Beak.Length_Culmen", "PC4"] < 0) pca <- flip_pc_sign(pca, "PC4
 # Add proportion of variance explained as the 11th row
 pca_summary <- rbind(pca$rotation, "Variance (%)" = (pca$sdev)^2/sum((pca$sdev)^2)*100)
 pca_summary # Table S1
+# signs of PC5-10 may be flipped when running on different machine, but they are not used for the downstream analyses so does not affect the result
 sum(pca_summary["Variance (%)", 1:4]) # total variance explained by first 4 PCs
 saveRDS(pca, "data/processed/pca.rds")
 
